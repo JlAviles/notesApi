@@ -15,7 +15,7 @@ describe('insert', () => {
     note = db.collection('test');
   });
 
-  it('Insert and find', async () => {
+  it('Insert and find by ID', async () => {
     const mockNote = {_id: '1', userId: '5ee48010d21f1c154cf0758c', content: 'Note test'};
     await note.insertOne(mockNote);
 

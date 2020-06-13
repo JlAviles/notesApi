@@ -9,7 +9,8 @@ describe('Notes', () => {
     addNote: () => response, 
     findAllNotes: () => response,
     findNoteById: () => response,
-    updateNote: () => response,                 
+    updateNote: () => response,
+    deleteNote: () => response,                 
 };
 
   beforeAll(async () => {
@@ -37,7 +38,11 @@ describe('Notes', () => {
   });
 
   it(`/PUT note`, async () => {
-    expect(await noteController.updateNote('_id', 'changes')).toBe(response);
+    expect(await noteController.updateNote('id', 'changes')).toBe(response);
+  });
+
+  it(`/DELETE note`, async () => {
+    expect(await noteController.deleteNote('id')).toBe(response);
   });
 
 });
