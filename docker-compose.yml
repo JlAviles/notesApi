@@ -1,0 +1,31 @@
+version: "3"
+services:
+    api:
+        restart: unless-stopped
+        build: .
+        ports:
+            - "4000:4000"
+        environment: 
+            - MONGODB_CONNECTION_URL=mongodb://db
+        volumes:
+            - .:/usr/src/app
+            - /usr/src/app/node_modules
+        depends_on: 
+            - db
+        networks: 
+            - backend
+    
+    db:
+        image: mongo
+        restart: unless-stopped
+        volumes:
+            - mongodata:/data/db
+        networks:
+            - backend
+
+volumes:
+    mongodata:
+
+networks: 
+    backend:
+        

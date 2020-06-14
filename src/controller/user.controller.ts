@@ -14,6 +14,11 @@ export class UserController {
       return this.user.addUser(user);
   }
 
+  @Get('/users')
+    async findAllUsers(): Promise<User[]> {
+        return this.user.findAllUsers();
+  }
+
   @Get('/user/:username')
     async findUserByUsername(@Param('username') username: string,): Promise<User> {
       return this.user.findUserByUsername(username);

@@ -4,9 +4,10 @@ import { UserService } from '../../src/service/user.service';
 
 describe('Users', () => {
   let userController: UserController;
-  const response = 'user';
+  let response;
   let userService = {
     addUser: () => response, 
+    findAllUsers: () => response,
     findUserByUsername: () => response,
     findUserById: () => response,
     updateUser: () => response,
@@ -14,7 +15,7 @@ describe('Users', () => {
 };
 
   beforeAll(async () => {
-    const note = await Test.createTestingModule({
+    const user = await Test.createTestingModule({
         controllers: [UserController], 
         providers: [UserService],
     })
@@ -22,26 +23,36 @@ describe('Users', () => {
         .useValue(userService)
         .compile();
 
-    userController = note.get<UserController>(UserController);
+    userController = user.get<UserController>(UserController);
   });
 
   it(`/POST user`, async () => {
+    response = 'user';
     expect(await userController.addUser(response)).toBe(response);
   });
 
+  it(`/GET users`, async () => {
+    response = ['user'];
+    expect(await userController.findAllUsers()).toBe(response);
+  });
+
   it(`/GET user/username`, async () => {
+    response = 'user';
     expect(await userController.findUserById('username')).toBe(response);
   });
 
   it(`/GET user/id`, async () => {
+    response = 'user';
     expect(await userController.findUserById('id')).toBe(response);
   });
 
   it(`/PUT user`, async () => {
+    response = 'user';
     expect(await userController.updateUser('id', 'changes')).toBe(response);
   });
 
   it(`/DELETE user`, async () => {
+    response = 'user';
     expect(await userController.deleteUser('id')).toBe(response);
   });
 

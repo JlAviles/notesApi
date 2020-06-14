@@ -9,7 +9,7 @@ import { FavoriteSchema } from './model/favorite.model';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://admin:7Ba5TeBSzlJflEn3@cluster0-e5gdr.mongodb.net/notesApi?retryWrites=true&w=majority', {
+    MongooseModule.forRoot(process.env.MONGODB_CONNECTION_URL, {
     connectionFactory: (connection) => { 
       connection.plugin(require('mongoose-autopopulate')); 
       return connection;
