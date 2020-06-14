@@ -4,6 +4,8 @@ import { NoteModule } from './module/note.module';
 import { NoteSchema } from './model/note.model';
 import { UserModule } from './module/user.module';
 import { UserSchema } from './model/user.model';
+import { FavoriteModule } from './module/favorite.module';
+import { FavoriteSchema } from './model/favorite.model';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { UserSchema } from './model/user.model';
     MongooseModule.forFeature([{name: 'Note', schema: NoteSchema}]),
     UserModule,
     MongooseModule.forFeature([{name: 'User', schema: UserSchema}]),
+    FavoriteModule,
+    MongooseModule.forFeature([{name: 'Favorite', schema: FavoriteSchema}])
   ],
   controllers: [],
   providers: [],
