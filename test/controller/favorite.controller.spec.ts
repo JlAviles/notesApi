@@ -1,17 +1,17 @@
 import { Test } from '@nestjs/testing';
-import { FavoriteController } from './favorite.controller';
-import { FavoriteService } from '../service/favorite.service';
+import { FavoriteController } from '../../src/controller/favorite.controller';
+import { FavoriteService } from '../../src/service/favorite.service';
 
 describe('Favorites', () => {
   let favoriteController: FavoriteController;
-  const response = 'favorite';
+  let response;
   let favoriteService = {
     createFavorite: () => response, 
-    findAllByUserId: () => response              
-};
+    findAllByUserId: () => response             
+  };
 
   beforeAll(async () => {
-    const note = await Test.createTestingModule({
+    const favorite = await Test.createTestingModule({
         controllers: [FavoriteController], 
         providers: [FavoriteService],
     })
@@ -19,14 +19,16 @@ describe('Favorites', () => {
         .useValue(favoriteService)
         .compile();
 
-    favoriteController = note.get<FavoriteController>(FavoriteController);
+    favoriteController = favorite.get<FavoriteController>(FavoriteController);
   });
 
   it(`/POST favorite`, async () => {
+    response = 'favorite';
     expect(await favoriteController.createFavorite(response)).toBe(response);
   });
 
   it(`/GET all favorites by user ID`, async () => {
+    response = ['favorite']
     expect(await favoriteController.findAllByUserId('id')).toBe(response);
   });
 

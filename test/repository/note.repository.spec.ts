@@ -2,7 +2,7 @@ import { ModuleTokenFactory } from "@nestjs/core/injector/module-token-factory";
 
 const { MongoClient } = require('mongodb');
 
-describe('insert', () => {
+describe('Notes', () => {
   let connection;
   let db;
   let note;
